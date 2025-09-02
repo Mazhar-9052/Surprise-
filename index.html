@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday Vaishu 🎉</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-image: url('bg.jpg'); /* Upload bg.jpg */
+      background-size: cover;
+      background-position: center;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      color: white;
+      text-align: center;
+    }
+
+    #countdown {
+      font-size: 2em;
+      font-weight: bold;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      border-radius: 15px;
+    }
+
+    #birthday-message {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #birthday-message img {
+      max-width: 300px;
+      border-radius: 15px;
+      margin-bottom: 20px;
+    }
+
+    #birthday-message h1 {
+      font-size: 2.5em;
+      color: yellow;
+      text-shadow: 2px 2px 5px black;
+    }
+
+    .balloon {
+      position: absolute;
+      bottom: -150px;
+      width: 50px;
+      height: 70px;
+      background: red;
+      border-radius: 50% 50% 50% 50%;
+      animation: float 8s infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-110vh); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div id="countdown"></div>
+
+  <div id="birthday-message">
+    <img src="vaishu.jpg" alt="Vaishu"> <!-- Upload vaishu.jpg -->
+    <h1>🎉 Happy Birthday Vaishu 🎂</h1>
+  </div>
+
+  <script>
+    // Countdown Target Date
+    const countDownDate = new Date("Sep 6, 2025 00:00:00").getTime();
+
+    const countdownFunction = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = countDownDate - now;
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("countdown").innerHTML =
+        days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+      // When countdown finishes
+      if (distance < 0) {
+        clearInterval(countdownFunction);
+        document.getElementById("countdown").style.display = "none";
+        document.getElementById("birthday-message").style.display = "flex";
+
+        // Generate Balloons
+        for (let i = 0; i < 20; i++) {
+          let balloon = document.createElement("div");
+          balloon.className = "balloon";
+          balloon.style.left = Math.random() * 100 + "vw";
+          balloon.style.background = "hsl(" + Math.random() * 360 + ",100%,50%)";
+          balloon.style.animationDuration = (5 + Math.random() * 5) + "s";
+          document.body.appendChild(balloon);
+        }
+      }
+    }, 1000);
+  </script>
+</body>
+  </html>
